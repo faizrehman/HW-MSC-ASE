@@ -16,7 +16,7 @@ public class AllBookingDemo {
 		BufferedReader buff=null;
 		String data []=new String[4];
 		try {
-			buff=new BufferedReader(new FileReader("C:\\Users\\mfais\\eclipse-workspace\\BaggageCheckIn\\src\\Bookings.txt"));
+			buff=new BufferedReader(new FileReader("bin/Bookings.txt"));
 			String inputLine=buff.readLine();
 			while(inputLine !=null) {
 				data=inputLine.split(",");
@@ -57,11 +57,15 @@ public class AllBookingDemo {
 	public static void main (String arg[])
 	{
 		
+		int Faizan =1;
+		
 		AllBookingDemo sld=new AllBookingDemo();
 		sld.showGUI();
 	
 		
 		Booking b = new Booking("","","",true);
+		Faizan = Faizan +1;
+		Faizan = Faizan +2;
 	}
 	
 }
