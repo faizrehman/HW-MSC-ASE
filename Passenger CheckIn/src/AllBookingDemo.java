@@ -62,6 +62,7 @@ public class AllBookingDemo {
 		AllBookingDemo sld=new AllBookingDemo();
 		sld.showGUI();
 		Faizan = Faizan +1;
+		Faizan = Faizan +2;
 	}
 	
 }
