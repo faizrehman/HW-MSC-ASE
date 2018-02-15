@@ -63,7 +63,6 @@ public class AllBookingDemo {
 		sld.showGUI();
 	
 		
-		Booking b = new Booking("","","",true);
 		Faizan = Faizan +1;
 		Faizan = Faizan +2;
 	}
