@@ -60,6 +60,8 @@ public class AllBookingDemo {
 		AllBookingDemo sld=new AllBookingDemo();
 		sld.showGUI();
 	
+		
+		Booking b = new Booking("","","",true);
 	}
 	
 }
