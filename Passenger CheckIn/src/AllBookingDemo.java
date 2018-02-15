@@ -16,7 +16,7 @@ public class AllBookingDemo {
 		BufferedReader buff=null;
 		String data []=new String[4];
 		try {
-			buff=new BufferedReader(new FileReader("C:\\Users\\mfais\\eclipse-workspace\\BaggageCheckIn\\src\\Bookings.txt"));
+			buff=new BufferedReader(new FileReader("bin/Bookings.txt"));
 			String inputLine=buff.readLine();
 			while(inputLine !=null) {
 				data=inputLine.split(",");
