@@ -87,7 +87,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	{
 		
 		
-		headerLabel.setText("Welcome To CheckIn Kiosk");      
+		headerLabel.setText("Welcome To Check-In Kiosk");      
 	      
 	      JPanel panel = new JPanel();
 	      panel.setBackground(Color.darkGray);
@@ -111,6 +111,8 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	      panel.add(jButtonViewReport); 
 	     
 	      controlPanel.add(panel);
+	      mainFrame.setLocationRelativeTo(null);
+
 	      mainFrame.setVisible(true);  
 		
 		return true;
@@ -180,19 +182,23 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
-			        System.out.println(form.getText(0) + " " + form.getText(1) + ". " + form.getText(2)
-			            + ", Baggage Dimension " + form.getText(3));
+			    	  System.out.println(bookings.BookingDetails());
+			    	  
+			    	  
+			        //System.out.println(form.getText(0) + " " + form.getText(1) + ". " + form.getText(2)
+			        //    + ", Baggage Dimension " + form.getText(3));
 			      }
 			    });
 
 			    JFrame f = new JFrame("Passeneger Check-In");
-			    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			    f.getContentPane().add(form, BorderLayout.NORTH);
 			    JPanel p = new JPanel();
 			    p.add(submit);
 			    f.getContentPane().add(p, BorderLayout.SOUTH);
 			    f.pack();
+			    f.setLocationRelativeTo(null);
 			    f.setVisible(true);
+			   
 		}
 		if(e.getSource()==jButtonViewReport)
 		{

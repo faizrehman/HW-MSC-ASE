@@ -57,32 +57,7 @@ public class CheckInGUI extends JPanel {
 	    return (fields[i].getText());
 	  }
 
-	  public static void main(String[] args) {
-	    String[] labels = { "Last Name", "Booking Reference", "Baggage Weight", "Baggage Dimensions" };
-	    char[] mnemonics = { 'F', 'M', 'L', 'A' };
-	    int[] widths = { 15, 15, 8, 12 };
-	    String[] descs = { "Last Name", "Booking Reference", "Baggage Weight", "Dimensions" };
-
-	    final CheckInGUI form = new CheckInGUI(labels, mnemonics, widths, descs);
-
-	    JButton submit = new JButton("Submit Form");
-
-	    submit.addActionListener(new ActionListener() {
-	      public void actionPerformed(ActionEvent e) {
-	        System.out.println(form.getText(0) + " " + form.getText(1) + ". " + form.getText(2)
-	            + ", Baggage Dimension " + form.getText(3));
-	      }
-	    });
-
-	    JFrame f = new JFrame("Passeneger Check-In");
-	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    f.getContentPane().add(form, BorderLayout.NORTH);
-	    JPanel p = new JPanel();
-	    p.add(submit);
-	    f.getContentPane().add(p, BorderLayout.SOUTH);
-	    f.pack();
-	    f.setVisible(true);
-	  }
+	 
 	
 	
 }
