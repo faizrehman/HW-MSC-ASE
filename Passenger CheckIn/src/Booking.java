@@ -1,10 +1,12 @@
-public class Booking {
+  public class Booking {
 	
 	
 	private String  BookingReference;
 	private String  PassengerName;
 	private String  FlightCode;
-	private boolean  CheckIn;
+	private boolean CheckIn;
+	/*Added by Faisal*/
+	private Flight 	FlightObject;
 	
 	
 	public Booking(String BookingReference, String PassengerName,
@@ -14,8 +16,7 @@ public class Booking {
 		this.PassengerName = PassengerName;
 		this.FlightCode = FlightCode;
 		this.CheckIn = CheckIn;
-		
-		
+				
 	}
 	
 	public boolean IsCheckedIn() {		
@@ -31,5 +32,17 @@ public class Booking {
 		return PassengerName;
 		
 	}
+	
+	public String getFlightCode() {
+		
+		return FlightCode;
+	}
+	/*Added by Faisal*/
+	public void setFlightObject(Flight f) 
+	{
+		this.FlightObject = f;
+	}
+	
+	
 
 }

@@ -44,5 +44,10 @@ private HashMap<String,Booking> bookingList;
 		
 		
 	}
+	
+	public HashMap<String,Booking> getAllBookings() 
+	{
+		return bookingList;
+	}
 
 }

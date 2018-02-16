@@ -56,15 +56,11 @@ public class AllBookingDemo {
 	
 	public static void main (String arg[])
 	{
-		
-		int Faizan =1;
-		
+			
 		AllBookingDemo sld=new AllBookingDemo();
 		sld.showGUI();
 	
 		
-		Faizan = Faizan +1;
-		Faizan = Faizan +2;
 	}
 	
 }
