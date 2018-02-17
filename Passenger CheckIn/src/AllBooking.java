@@ -16,7 +16,7 @@ private HashMap<String,Booking> bookingList;
 	{		
 		if(BookingReference.trim().length()==0)
 		{
-			throw new IllegalStateException("Booking Reference or Passenger Last name cannot be black");
+			throw new IllegalStateException("Booking Reference or Passenger Last name cannot be blank");
 			
 		}
 		Booking a = bookingList.get(BookingReference.toUpperCase());
