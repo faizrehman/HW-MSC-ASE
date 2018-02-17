@@ -10,17 +10,6 @@ private HashMap<String,Flight> flightList;
 		flightList = new HashMap<String,Flight>();
 	}
 	
-	public Flight Find(String FlightCode)
-	{		
-		Flight a = flightList.get(FlightCode);
-		if(a!=null)
-		{
-				return a;		
-			
-		}
-		return null;
-		
-	}
 	
 	public void Add(Flight a) 
 	{		

@@ -38,12 +38,13 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	 */
 	private AllBooking bookings;
 	private AllFlight flights;
+	private CheckInSummaryReport checkInSummary;
+	private CheckInSummaryGUI ViewReport;
 	
 	private JFrame mainFrame;
 	private JLabel headerLabel;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
-	private JLabel msglabel;
 	private JButton jButtonCheckIn;
 	private JButton jButtonViewReport;
 	
@@ -55,6 +56,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		//Populate all bookings from CSV
 		boolean retSuccessBookings = PopulateAllBookings();
 		boolean retSuccessFlights = PopulateAllFlights();
+		
 		
 		if (retSuccessBookings==false || retSuccessFlights ==false)
 			System.exit(1);
@@ -223,36 +225,54 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 
 			    final CheckInGUI form = new CheckInGUI(labels, mnemonics, widths, descs);
 
-			    JButton submit = new JButton("Submit Form");
-
-			    submit.addActionListener(new ActionListener() {
-			      public void actionPerformed(ActionEvent e) {
-			    	 
-			    	  
-			    	 
-			    	  boolean ret=bookings.IsValidBooking(form.getText(1), form.getText(0));
-			    	  
-			    	  if(ret)
-			    	  {
-			    		  bookings.UpdateCheckInStatus(form.getText(1));
-			    		  JOptionPane.showMessageDialog(rootPane, "Checked In successfully");
-			    	  }
-			    	  else
-			    	  {
-			    		  JOptionPane.showMessageDialog(rootPane, "Please enter a valid Booking details");
-			    		  
-			    	  }
-			    	  
-			    	  System.out.println(bookings.BookingDetails());
-			    	  
-			        //System.out.println(form.getText(0) + " " + form.getText(1) + ". " + form.getText(2)
-			        //    + ", Baggage Dimension " + form.getText(3));
-			      }
-			    });
+			  
+			  
 
 			    JFrame f = new JFrame("Passeneger Check-In");
 			    f.getContentPane().add(form, BorderLayout.NORTH);
 			    JPanel p = new JPanel();
+			    
+			    JButton submit = new JButton("Submit Form");  
+			    submit.addActionListener(new ActionListener() {
+				      public void actionPerformed(ActionEvent e) {
+				    	 
+				    	  Booking retbooking=bookings.IsValidBooking(form.getText(1).toUpperCase(), form.getText(0));
+				    	  
+				    	  if(retbooking!=null)
+				    	  {
+				    		  Integer weightDifference=Integer.parseInt(form.getText(2)) - flights.getAllFlights().get(retbooking.getFlightCode()).getMaxAllowedWeight();
+				    		  if(weightDifference>0)
+				    		  {
+				    			  String answer =            
+				    			          JOptionPane.showInputDialog 
+				    			          ( "Baggage weight exceed by " + weightDifference.toString() + "KG? Write yes if you want to pay and "
+				    			          		+ "proceed with this weight" );
+				    			  if (!answer.equals("yes"))
+				    			  {
+				    				  JOptionPane.showMessageDialog(rootPane, "Kindly adjust your baggage weight and Check-In again.");
+						    		  f.setVisible(false);
+						    		  return;
+						    	 
+				    			  }
+				    		  }
+				    		  bookings.UpdateCheckInStatus(form.getText(1).toUpperCase(),Integer.parseInt(form.getText(2)),form.getText(3));
+				    		  if(ViewReport!=null)
+				    			  ViewReport.RefreshReport();
+				    		  
+				    		  JOptionPane.showMessageDialog(rootPane, "Checked In successfully");
+				    		  f.setVisible(false);
+				    	  
+				    	  }
+				    	  else
+				    	  {
+				    		  JOptionPane.showMessageDialog(rootPane, "Please enter a valid Booking details");
+				    		  
+				    	  }
+				    	  
+				    	  System.out.println(bookings.BookingDetails());
+				      }
+				    });
+			    
 			    p.add(submit);
 			    f.getContentPane().add(p, BorderLayout.SOUTH);
 			    f.pack();
@@ -262,12 +282,12 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==jButtonViewReport)
 		{
-			CheckInSummary checkInSummary=new CheckInSummary(bookings, flights);
-		 CheckInSummaryGUI ViewReport=new CheckInSummaryGUI(checkInSummary);
-		ViewReport.setVisible(true);
 			
 			
-			//JOptionPane.showMessageDialog(rootPane, "View Report Button Clicked");
+			checkInSummary=new CheckInSummaryReport(bookings, flights);
+			ViewReport=new CheckInSummaryGUI(checkInSummary);
+		 	ViewReport.setVisible(true);
+		 	
 		}
 		
 	}

@@ -6,41 +6,35 @@ import javax.swing.*;
 /*Added by Faisal*/
 public class CheckInSummaryGUI extends JFrame implements ActionListener {
 
-private CheckInSummary checkInList;
-
-
+private CheckInSummaryReport checkInList;
+JButton refresh;
 
 JTextArea displayList;
-JTextField searchField;
 
-public CheckInSummaryGUI(CheckInSummary list)
+
+public CheckInSummaryGUI(CheckInSummaryReport list)
 {
 	this.checkInList=list;
-	setTitle("CheckIn");
+	setTitle("Check In Summary");
 	
-	//setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
-	JPanel searchPanel =new JPanel();
-	searchPanel.setLayout(new GridLayout(1, 4));
-	searchPanel.add(new JLabel("Booking Reference"));
-	searchField = new JTextField(5);
-	searchPanel.add(searchField);
-	
-	searchbutton=new JButton("Search");
-	searchPanel.add(searchbutton);
-	
-	searchbutton.addActionListener(this);
-	
-	result=new JTextField(25);
-	result.setEditable(false);
-	
-	JPanel southPanel=new JPanel();
-	southPanel.setLayout(new GridLayout(2, 1));
-	southPanel.add(searchPanel);
-	
-	southPanel.add(result);
-	
+	 //search panel contains label, text field and button
+    JPanel searchPanel = new JPanel();
+    searchPanel.setLayout(new GridLayout(1,3));
+    searchPanel.add(new JLabel("Press button to refresh the report"));   
+    refresh = new JButton("Refresh Report");  
+    searchPanel.add(refresh);    
+    //specify action when button is pressed
+    refresh.addActionListener(this) ;
+    
+    
+  //set up south panel containing 2 previous areas
+    JPanel southPanel = new JPanel();
+    southPanel.setLayout(new GridLayout(2,1));
+    southPanel.add(searchPanel);
+   
 	Container contentPane  = getContentPane();
+	contentPane.setPreferredSize(new Dimension(1000, 300));
 	contentPane.add(southPanel, BorderLayout.SOUTH);
 	
 	displayList = new JTextArea(15,20);
@@ -48,9 +42,11 @@ public CheckInSummaryGUI(CheckInSummary list)
 	displayList.setEditable(false);
 	scrollPane=new JScrollPane(displayList);
 	
+	scrollPane.setSize(600, 300);
+	
 	contentPane.add(scrollPane,BorderLayout.CENTER);
 
-	displayList.setText(checkInList.getCheckInSummary());
+	displayList.setText(checkInList.getCheckInSummaryReport());
 	
 	pack();
 	setVisible(true);
@@ -58,26 +54,18 @@ public CheckInSummaryGUI(CheckInSummary list)
 
 }
 
-JTextField result;
-
-JButton searchbutton;
-JScrollPane scrollPane;
-
-public void actionPerformed(ActionEvent e)
+public void RefreshReport()
 {
-//displayList.setText(checkInList.BookingDetails());
+	displayList.setText(checkInList.getCheckInSummaryReport());
 }
 
+JScrollPane scrollPane;	
+public void actionPerformed(ActionEvent e) 
+{ 
+	if (e.getSource() == refresh) {
+		displayList.setText(checkInList.getCheckInSummaryReport());
+	}
+}  
 
-
-public static void main (String arg[])
-{
-		
-	//CheckInSummaryGUI sld=new CheckInSummaryGUI();
-	//sld.showGUI();
-
-	
 }
-	
-	
-}
+

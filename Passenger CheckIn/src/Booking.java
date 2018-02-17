@@ -5,8 +5,8 @@
 	private String  PassengerName;
 	private String  FlightCode;
 	private boolean CheckIn;
-	/*Added by Faisal*/
-	private Flight 	FlightObject;
+	private Integer  CheckedInWeight;
+	private String  BaggageDimension;
 	
 	
 	public Booking(String BookingReference, String PassengerName,
@@ -23,9 +23,11 @@
 		return CheckIn;
 		
 	}
-	public void SetCheckedIn() {		
+	public void SetCheckedIn(Integer CheckedInWeight,
+			String BaggageDimension ) {		
 		this.CheckIn=true;
-		
+		this.CheckedInWeight=CheckedInWeight;
+		this.BaggageDimension=BaggageDimension;
 	}
 
 	
@@ -42,14 +44,22 @@
 		
 		return FlightCode;
 	}
-	/*Added by Faisal*/
-	public void setFlightObject(Flight f) 
-	{
-		this.FlightObject = f;
+	
+
+	public Integer getCheckedInWeight() {
+		return CheckedInWeight;
 	}
-	public Flight getFlightObject() 
-	{
-		return FlightObject;
+
+	public void setCheckedInWeight(Integer checkedInWeight) {
+		CheckedInWeight = checkedInWeight;
+	}
+
+	public String getBaggageDimension() {
+		return BaggageDimension;
+	}
+
+	public void setBaggageDimension(String baggageDimension) {
+		BaggageDimension = baggageDimension;
 	}
 	
 	

@@ -10,10 +10,11 @@ private HashMap<String,Booking> bookingList;
 	{
 		bookingList = new HashMap<String,Booking>();
 	}
+		
 	
-	public Booking FindbyName(String BookingReference,String PassengerName)
+	public Booking IsValidBooking(String BookingReference,String PassengerName)
 	{		
-		Booking a = bookingList.get(BookingReference);
+		Booking a = bookingList.get(BookingReference.toUpperCase());
 		if(a!=null)
 		{
 		
@@ -26,28 +27,13 @@ private HashMap<String,Booking> bookingList;
 		
 	}
 	
-	
-	public boolean IsValidBooking(String BookingReference,String PassengerName)
+	public boolean UpdateCheckInStatus(String BookingReference,Integer CheckedInWeight,
+							String BaggageDimension )
 	{		
 		Booking a = bookingList.get(BookingReference);
 		if(a!=null)
 		{
-		
-			if(a.getPassengerName().toLowerCase().equals(PassengerName.toLowerCase()))
-			{
-				return true;		
-			}
-		}
-		return false;
-		
-	}
-	
-	public boolean UpdateCheckInStatus(String BookingReference)
-	{		
-		Booking a = bookingList.get(BookingReference);
-		if(a!=null)
-		{
-			bookingList.get(BookingReference).SetCheckedIn();
+			bookingList.get(BookingReference).SetCheckedIn(CheckedInWeight,BaggageDimension);
 			
 			return true;
 		}
