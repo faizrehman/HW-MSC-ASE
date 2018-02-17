@@ -12,8 +12,13 @@ private HashMap<String,Booking> bookingList;
 	}
 		
 	
-	public Booking IsValidBooking(String BookingReference,String PassengerName)
+	public Booking IsValidBooking(String BookingReference,String PassengerName) throws  IllegalStateException
 	{		
+		if(BookingReference.trim().length()==0)
+		{
+			throw new IllegalStateException("Booking Reference or Passenger Last name cannot be black");
+			
+		}
 		Booking a = bookingList.get(BookingReference.toUpperCase());
 		if(a!=null)
 		{

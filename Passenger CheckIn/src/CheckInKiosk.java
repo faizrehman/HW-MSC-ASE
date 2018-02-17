@@ -236,6 +236,8 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 			    submit.addActionListener(new ActionListener() {
 				      public void actionPerformed(ActionEvent e) {
 				    	 
+				    	  try
+				    	  {
 				    	  Booking retbooking=bookings.IsValidBooking(form.getText(1).toUpperCase(), form.getText(0));
 				    	  
 				    	  if(retbooking!=null)
@@ -270,6 +272,15 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				    	  }
 				    	  
 				    	  System.out.println(bookings.BookingDetails());
+				      }
+				    	  catch(IllegalStateException ex)
+				    	  {
+				    		  
+				    		  JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+						    	  
+				    	  }
+				    	  finally{}
+				    	  
 				      }
 				    });
 			    
