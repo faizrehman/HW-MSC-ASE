@@ -23,7 +23,12 @@
 		return CheckIn;
 		
 	}
+	public void SetCheckedIn() {		
+		this.CheckIn=true;
+		
+	}
 
+	
 	public String getBookingReference() {		
 		return BookingReference;
 		
@@ -42,6 +47,12 @@
 	{
 		this.FlightObject = f;
 	}
+	public Flight getFlightObject() 
+	{
+		return FlightObject;
+	}
+	
+	
 	
 	
 

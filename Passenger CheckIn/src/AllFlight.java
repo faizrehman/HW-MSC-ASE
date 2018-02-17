@@ -10,16 +10,13 @@ private HashMap<String,Flight> flightList;
 		flightList = new HashMap<String,Flight>();
 	}
 	
-	public Flight Find(String FlightCode,String Name)
+	public Flight Find(String FlightCode)
 	{		
 		Flight a = flightList.get(FlightCode);
 		if(a!=null)
 		{
-		
-			if(a.getCarrierName().equals(Name))
-			{
 				return a;		
-			}
+			
 		}
 		return null;
 		

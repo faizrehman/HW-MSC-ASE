@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	 * @param args
 	 */
 	private AllBooking bookings;
+	private AllFlight flights;
 	
 	private JFrame mainFrame;
 	private JLabel headerLabel;
@@ -51,8 +53,10 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		prepareGUI();
 		
 		//Populate all bookings from CSV
-		boolean retSuccess = PopulateAllBookings();
-		if (retSuccess==false)
+		boolean retSuccessBookings = PopulateAllBookings();
+		boolean retSuccessFlights = PopulateAllFlights();
+		
+		if (retSuccessBookings==false || retSuccessFlights ==false)
 			System.exit(1);
 		
 		
@@ -156,6 +160,49 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		
 	}
 	
+	
+
+	public boolean PopulateAllFlights()
+	{
+		// Fetching Data from CSV and initializing and populating bookings object
+		
+				flights = new AllFlight();
+				BufferedReader buff=null;
+				String data []=new String[4];
+				
+				try {
+					buff=new BufferedReader(new FileReader("bin/FlightsInfo.txt"));
+					String inputLine=buff.readLine();
+					while(inputLine !=null) {
+						data=inputLine.split(",");
+						
+						Flight b = new Flight(data[0], data[1],  data[2],Integer.parseInt(data[3]));
+						flights.Add(b);
+						inputLine=buff.readLine();
+					}
+					
+					
+				}
+				catch(FileNotFoundException e)
+				{
+					System.out.println(e.getMessage());
+					return false;
+					
+					
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+					return false;
+					
+					
+				}
+				return true;
+		
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CheckInKiosk welcomeDemo = new CheckInKiosk();  
@@ -169,8 +216,6 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		
 		if(e.getSource()==jButtonCheckIn)
 		{
-			//JOptionPane.showMessageDialog(rootPane, "Check In Button Clicked");
-			
 			 String[] labels = { "Last Name", "Booking Reference", "Baggage Weight", "Baggage Dimensions" };
 			    char[] mnemonics = { 'F', 'M', 'L', 'A' };
 			    int[] widths = { 15, 15, 8, 12 };
@@ -182,8 +227,23 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
-			    	  System.out.println(bookings.BookingDetails());
+			    	 
 			    	  
+			    	 
+			    	  boolean ret=bookings.IsValidBooking(form.getText(1), form.getText(0));
+			    	  
+			    	  if(ret)
+			    	  {
+			    		  bookings.UpdateCheckInStatus(form.getText(1));
+			    		  JOptionPane.showMessageDialog(rootPane, "Checked In successfully");
+			    	  }
+			    	  else
+			    	  {
+			    		  JOptionPane.showMessageDialog(rootPane, "Please enter a valid Booking details");
+			    		  
+			    	  }
+			    	  
+			    	  System.out.println(bookings.BookingDetails());
 			    	  
 			        //System.out.println(form.getText(0) + " " + form.getText(1) + ". " + form.getText(2)
 			        //    + ", Baggage Dimension " + form.getText(3));
@@ -202,7 +262,12 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==jButtonViewReport)
 		{
-			JOptionPane.showMessageDialog(rootPane, "View Report Button Clicked");
+			CheckInSummary checkInSummary=new CheckInSummary(bookings, flights);
+		 CheckInSummaryGUI ViewReport=new CheckInSummaryGUI(checkInSummary);
+		ViewReport.setVisible(true);
+			
+			
+			//JOptionPane.showMessageDialog(rootPane, "View Report Button Clicked");
 		}
 		
 	}

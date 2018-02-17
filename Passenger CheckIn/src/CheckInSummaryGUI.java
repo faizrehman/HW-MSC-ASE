@@ -8,6 +8,8 @@ public class CheckInSummaryGUI extends JFrame implements ActionListener {
 
 private CheckInSummary checkInList;
 
+
+
 JTextArea displayList;
 JTextField searchField;
 
@@ -16,10 +18,10 @@ public CheckInSummaryGUI(CheckInSummary list)
 	this.checkInList=list;
 	setTitle("CheckIn");
 	
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	//setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 	JPanel searchPanel =new JPanel();
-	searchPanel.setLayout(new GridLayout(1, 3));
+	searchPanel.setLayout(new GridLayout(1, 4));
 	searchPanel.add(new JLabel("Booking Reference"));
 	searchField = new JTextField(5);
 	searchPanel.add(searchField);
@@ -47,6 +49,8 @@ public CheckInSummaryGUI(CheckInSummary list)
 	scrollPane=new JScrollPane(displayList);
 	
 	contentPane.add(scrollPane,BorderLayout.CENTER);
+
+	displayList.setText(checkInList.getCheckInSummary());
 	
 	pack();
 	setVisible(true);
@@ -61,14 +65,15 @@ JScrollPane scrollPane;
 
 public void actionPerformed(ActionEvent e)
 {
-	//displayList.setText(checkInList.BookingDetails());
+//displayList.setText(checkInList.BookingDetails());
 }
+
 
 
 public static void main (String arg[])
 {
 		
-	//CheckInSummaryGUI sld=new CheckInSummaryGUI(checkInList);
+	//CheckInSummaryGUI sld=new CheckInSummaryGUI();
 	//sld.showGUI();
 
 	

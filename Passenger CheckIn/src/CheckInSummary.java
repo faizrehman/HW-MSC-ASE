@@ -27,4 +27,21 @@ public class CheckInSummary  {
 	}
 
 	
+	public String getCheckInSummary()
+	{
+		StringBuffer allEntries=new StringBuffer();
+		
+		allEntries.append( "Carrier Name" + "		" + "Booking Reference" + "		" + "Passenger Name" + "		" + "CheckIn Status");
+		allEntries.append('\n');
+		
+		for(Booking details : bookingList.getAllBookings().values())
+		{
+			allEntries.append( details.getFlightObject().getCarrierName() + "			" + details.getBookingReference() + "			" + details.getPassengerName() + "			" + details.IsCheckedIn());
+			allEntries.append('\n');
+		}
+		return allEntries.toString();
+		
+		
+	}
+	
 }

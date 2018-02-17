@@ -4,11 +4,11 @@ public class Flight {
 	
 	private String  FlightCode;
 	private String  CarrierName;
-	private Date  FlightTime;
+	private String  FlightTime;
 	private Integer MaxAllowedWeight;	
 	
 	public Flight(String FlightCode, String CarrierName,
-			Date FlightTime,int MaxAllowedWeight) 
+			String FlightTime,int MaxAllowedWeight) 
 	{
 		this.FlightCode = FlightCode;
 		this.CarrierName = CarrierName;
@@ -25,7 +25,7 @@ public class Flight {
 		return CarrierName;
 		
 	}
-	public Date getFlightTime() {		
+	public String getFlightTime() {		
 		return FlightTime;		
 	}
 	

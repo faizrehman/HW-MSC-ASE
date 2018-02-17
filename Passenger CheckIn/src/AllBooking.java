@@ -17,12 +17,41 @@ private HashMap<String,Booking> bookingList;
 		if(a!=null)
 		{
 		
-			if(a.getPassengerName().equals(PassengerName))
+			if(a.getPassengerName().toLowerCase().equals(PassengerName.toLowerCase()))
 			{
 				return a;		
 			}
 		}
 		return null;
+		
+	}
+	
+	
+	public boolean IsValidBooking(String BookingReference,String PassengerName)
+	{		
+		Booking a = bookingList.get(BookingReference);
+		if(a!=null)
+		{
+		
+			if(a.getPassengerName().toLowerCase().equals(PassengerName.toLowerCase()))
+			{
+				return true;		
+			}
+		}
+		return false;
+		
+	}
+	
+	public boolean UpdateCheckInStatus(String BookingReference)
+	{		
+		Booking a = bookingList.get(BookingReference);
+		if(a!=null)
+		{
+			bookingList.get(BookingReference).SetCheckedIn();
+			
+			return true;
+		}
+		return false;
 		
 	}
 	
@@ -37,7 +66,7 @@ private HashMap<String,Booking> bookingList;
 		
 		for(Booking details : bookingList.values())
 		{
-			allEntries.append(details.getBookingReference() + "		" + details.getPassengerName());
+			allEntries.append(details.getBookingReference() + "		" + details.getPassengerName() + "		" + details.IsCheckedIn());
 			allEntries.append('\n');
 		}
 		return allEntries.toString();

@@ -15,12 +15,6 @@ public class CheckInGUI extends JPanel {
 
 	private AllBooking bookingList;
 	
-	//public CheckInGUI(AllBooking list)
-//	{
-	//	this.bookingList=list;
-		//setTitle("Bookings");
-		
-	//}
 	
 	private JTextField[] fields;
 
