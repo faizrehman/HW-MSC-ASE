@@ -10,6 +10,13 @@ public class Flight {
 	public Flight(String FlightCode, String CarrierName,
 			String FlightTime,int MaxAllowedWeight) 
 	{
+		/* Added by Faisal*/
+		if(FlightCode.trim().length() == 0 || CarrierName.trim().length() == 0
+				|| FlightTime.trim().length() == 0) 
+		{
+			
+			throw new IllegalArgumentException("FlighCode, Carrier Name & Flight Time Cannot be blank");
+		}
 		this.FlightCode = FlightCode;
 		this.CarrierName = CarrierName;
 		this.FlightTime = FlightTime;

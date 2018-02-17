@@ -14,6 +14,12 @@ JTextArea displayList;
 
 public CheckInSummaryGUI(CheckInSummaryReport list)
 {
+	/* Added by Faisal*/
+	if(list == null) 
+	{		
+		throw new IllegalArgumentException("CheckInSummaryReport list cannot be blank");
+	}
+	
 	this.checkInList=list;
 	setTitle("Check In Summary");
 	

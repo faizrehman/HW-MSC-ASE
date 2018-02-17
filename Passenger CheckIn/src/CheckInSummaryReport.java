@@ -6,6 +6,10 @@ public class CheckInSummaryReport  {
 	
 	public CheckInSummaryReport(AllBooking b,AllFlight f) 
 	{
+		if(b == null || f == null) 
+		{			
+			throw new IllegalArgumentException("Bookings & FlightInfo cannot be null");
+		}
 		this.bookings = b;
 		this.flights = f;
 	}

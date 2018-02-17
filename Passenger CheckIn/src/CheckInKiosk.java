@@ -137,9 +137,21 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
-						Booking b = new Booking(data[0], data[1], data[2],Boolean.getBoolean(data[3]));
+						/* Added by Faisal*/
+						int variableCount = data.length;
+						
+						if(variableCount == 4) 
+						{
+						
+						String bookingReference = data[0].length() == 0 ? "" : data[0];
+						String PassengerName = data[1].length() == 0 ? "" : data[1];
+						String FlightCode = data[2].length() == 0 ? "" : data[2];
+						String CheckIn = data[3].length() == 0 ? "" : data[3];
+						
+						Booking b = new Booking(bookingReference, PassengerName,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
+						}
 					}
 					
 					
@@ -158,6 +170,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					
 					
 				}
+
 				return true;
 		
 	}
@@ -177,13 +190,24 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
+						/* Added by Faisal*/
+						int variableCount = data.length;
 						
-						Flight b = new Flight(data[0], data[1],  data[2],Integer.parseInt(data[3]));
+						if(variableCount == 4) 
+						{
+							String FlightCode = data[0].length() == 0 ? "" : data[0];
+							String CarrierName = data[1].length() == 0 ? "" : data[1];
+							String FlightTime = data[2].length() == 0 ? "" : data[2];
+							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];							
+							
+						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight));
 						flights.Add(b);
 						inputLine=buff.readLine();
+						
+						}
 					}
-					
-					
+					/*Added by Faisal*/
+					buff.close();
 				}
 				catch(FileNotFoundException e)
 				{
@@ -199,6 +223,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					
 					
 				}
+				
 				return true;
 		
 	}
@@ -224,9 +249,6 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 			    String[] descs = { "Last Name", "Booking Reference", "Baggage Weight", "Dimensions" };
 
 			    final CheckInGUI form = new CheckInGUI(labels, mnemonics, widths, descs);
-
-			  
-			  
 
 			    JFrame f = new JFrame("Passeneger Check-In");
 			    f.getContentPane().add(form, BorderLayout.NORTH);
