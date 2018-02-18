@@ -295,12 +295,22 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				    	  
 				    	  System.out.println(bookings.BookingDetails());
 				      }
+				    	  catch(InValidCheckInException ex)
+				    	  {
+				    		  JOptionPane.showMessageDialog(null, ex.getMessage(),"Alert", JOptionPane.ERROR_MESSAGE);
+				    	  }
+				    	  catch(NumberFormatException ex)
+				    	  {
+				    		  JOptionPane.showMessageDialog(null,"Baggage Weight and Dimension should be in number format","Alert", JOptionPane.ERROR_MESSAGE);
+
+				    	  }
 				    	  catch(IllegalStateException ex)
 				    	  {
 				    		  
 				    		  JOptionPane.showMessageDialog(rootPane, ex.getMessage());
 						    	  
 				    	  }
+				    	  
 				    	  finally{}
 				    	  
 				      }

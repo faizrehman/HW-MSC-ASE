@@ -33,7 +33,7 @@ private HashMap<String,Booking> bookingList;
 	}
 	
 	public boolean UpdateCheckInStatus(String BookingReference,Integer CheckedInWeight,
-							String BaggageDimension )
+							String BaggageDimension ) throws InValidCheckInException
 	{		
 		Booking a = bookingList.get(BookingReference);
 		if(a!=null)

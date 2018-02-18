@@ -34,28 +34,37 @@ public class Booking {
 		
 	}
 	/*Added By Faisal*/
-	public void SetCheckedIn(Integer CheckedInWeight,
-			String BaggageDimension ) {	
-		try
+	public void SetCheckedIn(Integer CheckedInWeight,String BaggageDimension ) throws InValidCheckInException
+	{			
+	
+
+			Integer length,breadth,height;
+		if(BaggageDimension.matches("\\d{2}x\\d{2}x\\d{2}"))
 		{
-			if(CheckedInWeight == 0)
+			String[] dimension=BaggageDimension.split("x");
+		 	length =Integer.parseInt(dimension[0]); // l
+			breadth =Integer.parseInt(dimension[1]); // b
+			height =Integer.parseInt(dimension[2]); // h 
+			
+			if(length > 20 || breadth > 20 || height > 20 || CheckedInWeight > 100)
 			{
-				throw new ZeroCheckedInWeight();
-			}			
-			else
-			{
-				this.CheckIn=true;
-				this.CheckedInWeight=CheckedInWeight;
-				this.BaggageDimension=BaggageDimension;
+
+				throw new InValidCheckInException();
 			}
-			
-			
+			else
+			{	this.CheckIn=true;
+			this.CheckedInWeight=CheckedInWeight;
+			this.BaggageDimension=BaggageDimension;
+			}
 		}
-		catch(ZeroCheckedInWeight e) 
+		else
 		{
-			JOptionPane.showMessageDialog(null, e.getMessage(),"Alert", JOptionPane.ERROR_MESSAGE);
-		}		
-		
+
+			throw new InValidCheckInException();
+		}
+			
+					
+				
 	}
 
 	
@@ -78,23 +87,17 @@ public class Booking {
 		return CheckedInWeight;
 	}
 /*Added By Faisal*/
-	public void setCheckedInWeight(Integer checkedInWeight) throws ZeroCheckedInWeight {
+	public void setCheckedInWeight(Integer checkedInWeight) throws InValidCheckInException {
 		
-		try
-		{
 			if(checkedInWeight == 0)
 			{
-				throw new ZeroCheckedInWeight();
+				throw new InValidCheckInException();
 			}			
 			else
+			{
 				CheckedInWeight = checkedInWeight;
 			
-		}
-		catch(ZeroCheckedInWeight e) 
-		{
-			JOptionPane.showMessageDialog(null, e.getMessage(),"Alert", JOptionPane.ERROR_MESSAGE);
-		}			
-		
+			}
 	}
 
 	public String getBaggageDimension() {
