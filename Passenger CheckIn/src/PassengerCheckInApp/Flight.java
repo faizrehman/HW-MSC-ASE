@@ -1,3 +1,4 @@
+package PassengerCheckInApp;
 import java.util.Date;
 /*Added By Faisal*/
 public class Flight {

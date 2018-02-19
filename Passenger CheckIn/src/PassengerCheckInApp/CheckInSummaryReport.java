@@ -1,3 +1,4 @@
+package PassengerCheckInApp;
 /*Added By Faisal*/
 public class CheckInSummaryReport  {
 	

@@ -1,3 +1,4 @@
+package PassengerCheckInApp;
 import java.util.HashMap;
 /*Added By Faisal*/
 public class AllFlight {

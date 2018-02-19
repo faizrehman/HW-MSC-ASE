@@ -1,3 +1,4 @@
+package PassengerCheckInApp;
 import javax.swing.JOptionPane;
 
 public class Booking {
