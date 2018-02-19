@@ -288,6 +288,11 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				    			          JOptionPane.showInputDialog 
 				    			          ( "Baggage weight exceed by " + weightDifference.toString() + "KG? Write yes if you want to pay and "
 				    			          		+ "proceed with this weight" );
+				    			  
+				    			  if(answer == null || (answer != null && ("".equals(answer))))   
+				    			  {
+				    			    return;  
+				    			  }
 				    			  if (!answer.equals("yes"))
 				    			  {
 				    				  JOptionPane.showMessageDialog(rootPane, "Kindly adjust your baggage weight and Check-In again.");
