@@ -13,6 +13,18 @@ public class JUnitTestRunner {
 	         System.out.println(failure.toString());
 	      }
 			
+	      result = JUnitCore.runClasses(AllFlightTest.class);
+			
+	      for (Failure failure : result.getFailures()) {
+	         System.out.println(failure.toString());
+	      }
+	      
+	      result = JUnitCore.runClasses(CheckInSummaryReportTest.class);
+			
+	      for (Failure failure : result.getFailures()) {
+	         System.out.println(failure.toString());
+	      }
+	      
 	      System.out.println(result.wasSuccessful());
 		
 	}
