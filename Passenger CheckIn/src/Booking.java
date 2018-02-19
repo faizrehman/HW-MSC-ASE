@@ -12,7 +12,7 @@ public class Booking {
 	
 	
 	public Booking(String BookingReference, String PassengerName,
-			String FlightCode,boolean CheckIn) 
+			String FlightCode,boolean CheckIn) throws IllegalArgumentException
 	{
 		
 		/* Added by Faisal*/

@@ -163,6 +163,14 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					
 					
 				}
+				catch(IllegalArgumentException e) 
+				{
+
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Booking found with in valid parametes","Alert", JOptionPane.ERROR_MESSAGE);
+			    	return false;
+					
+				}
 				catch(IOException e)
 				{
 					e.printStackTrace();
@@ -214,6 +222,14 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 					System.out.println(e.getMessage());
 					return false;
 					
+					
+				}
+				catch(IllegalArgumentException e) 
+				{
+
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Flight Info with in valid parametes","Alert", JOptionPane.ERROR_MESSAGE);
+			    	return false;
 					
 				}
 				catch(IOException e)

@@ -8,7 +8,7 @@ public class Flight {
 	private Integer MaxAllowedWeight;	
 	
 	public Flight(String FlightCode, String CarrierName,
-			String FlightTime,int MaxAllowedWeight) 
+			String FlightTime,int MaxAllowedWeight)  throws IllegalArgumentException
 	{
 		/* Added by Faisal*/
 		if(FlightCode.trim().length() == 0 || CarrierName.trim().length() == 0

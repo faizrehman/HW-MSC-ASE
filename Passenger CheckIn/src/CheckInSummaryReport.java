@@ -4,7 +4,7 @@ public class CheckInSummaryReport  {
 	private AllBooking bookings;
 	private AllFlight flights;	
 	
-	public CheckInSummaryReport(AllBooking b,AllFlight f) 
+	public CheckInSummaryReport(AllBooking b,AllFlight f) throws IllegalArgumentException
 	{
 		if(b == null || f == null) 
 		{			
