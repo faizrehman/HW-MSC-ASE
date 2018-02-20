@@ -52,18 +52,17 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	// Constructor of a class
 	public CheckInKiosk(){
 		
-		prepareGUI();
+		/* Modified by Amer*/
+		
 		
 		//Populate all bookings from CSV
 		boolean retSuccessBookings = PopulateAllBookings();
 		boolean retSuccessFlights = PopulateAllFlights();
 		
-		
 		if (retSuccessBookings==false || retSuccessFlights ==false)
 			System.exit(1);
 		
-		
-		
+     	prepareGUI();
 	}
 	
 	private void prepareGUI(){
@@ -134,7 +133,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/Bookings.txt"));
+					buff=new BufferedReader(new FileReader("/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt"));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
@@ -195,7 +194,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/FlightsInfo.txt"));
+					buff=new BufferedReader(new FileReader("/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt"));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");

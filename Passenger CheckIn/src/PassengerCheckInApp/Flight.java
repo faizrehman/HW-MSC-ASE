@@ -1,5 +1,4 @@
 package PassengerCheckInApp;
-import java.util.Date;
 /*Added By Faisal*/
 public class Flight {
 	
@@ -12,6 +11,7 @@ public class Flight {
 	public Flight(String FlightCode, String CarrierName,
 			String FlightTime,int MaxAllowedWeight,Integer ExtraChargePerKg)  throws IllegalArgumentException
 	{
+		
 		/* Added by Faisal*/
 		if(FlightCode.trim().length() == 0 || CarrierName.trim().length() == 0
 				|| FlightTime.trim().length() == 0) 
