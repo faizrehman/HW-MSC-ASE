@@ -33,6 +33,9 @@ public class AllBookingTest {
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				bookings = new AllBooking();
+				Passenger PassengerData;
+				int PassengerId=0;
+				
 				BufferedReader buff=null;
 				String data []=new String[4];
 				
@@ -44,15 +47,20 @@ public class AllBookingTest {
 						/* Added by Faisal*/
 						int variableCount = data.length;
 						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 						
 						String bookingReference = data[0].length() == 0 ? "" : data[0];
-						String PassengerName = data[1].length() == 0 ? "" : data[1];
+						String PassengerFName = data[1].length() == 0 ? "" : data[1];
+						String PassengerLName = data[2].length() == 0 ? "" : data[2];
 						String FlightCode = data[2].length() == 0 ? "" : data[2];
 						String CheckIn = data[3].length() == 0 ? "" : data[3];
 						
-						Booking b = new Booking(bookingReference, PassengerName,FlightCode,Boolean.getBoolean(CheckIn));
+						/* Added by Amer*/
+						PassengerId+=1;
+						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);
+						
+						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
 						}

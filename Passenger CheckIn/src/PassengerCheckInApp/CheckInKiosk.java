@@ -10,10 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -50,14 +52,40 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	private JButton jButtonViewReport;
 	
 	// Constructor of a class
-	public CheckInKiosk(){
+	public CheckInKiosk() throws IllegalArgumentException{
 		
 		/* Modified by Amer*/
 		
+		String bookingsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt";
+		String flightsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt";
+		
+//		String bookingsPath,flightsPath="";
+		
+//		Scanner reader = new Scanner(System.in);  // Reading from System.in
+//		
+//		//read the booking file path
+//		System.out.println("Enter a Bookings file Path: ");
+//		bookingsPath = reader.nextLine(); // Scans the input as a string.
+//		System.out.println("Selected booking file path " + bookingsPath);
+//		
+//		//read the flight path
+//		System.out.println("Enter a Flights file Path: ");
+//		flightsPath =reader.nextLine(); // Scans  the input as a string.
+//		System.out.println("Selected flights file Path " + flightsPath);
+//		
+//		//once finished close the reader
+//		reader.close(); 
+		
+		
+		if(bookingsPath.trim().length() == 0 || flightsPath.trim().length() == 0) 
+		{
+			
+			throw new IllegalArgumentException("the files path Cannot be blank");
+		}
 		
 		//Populate all bookings from CSV
-		boolean retSuccessBookings = PopulateAllBookings();
-		boolean retSuccessFlights = PopulateAllFlights();
+		boolean retSuccessBookings = PopulateAllBookings(bookingsPath);
+		boolean retSuccessFlights = PopulateAllFlights(flightsPath);
 		
 		if (retSuccessBookings==false || retSuccessFlights ==false)
 			System.exit(1);
@@ -124,34 +152,46 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		return true;
 	}
 	
-	public boolean PopulateAllBookings()
+	public boolean PopulateAllBookings(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				bookings = new AllBooking();
+				Passenger PassengerData;
+				int PassengerId=0;
 				BufferedReader buff=null;
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
 						/* Added by Faisal*/
 						int variableCount = data.length;
-						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 						
 						String bookingReference = data[0].length() == 0 ? "" : data[0];
-						String PassengerName = data[1].length() == 0 ? "" : data[1];
-						String FlightCode = data[2].length() == 0 ? "" : data[2];
-						String CheckIn = data[3].length() == 0 ? "" : data[3];
+						String PassengerFName = data[1].length() == 0 ? "" : data[1];
+						String PassengerLName = data[2].length() == 0 ? "" : data[2];
+						String FlightCode = data[2].length() == 0 ? "" : data[3];
+						String CheckIn = data[3].length() == 0 ? "" : data[4];
 						
-						Booking b = new Booking(bookingReference, PassengerName,FlightCode,Boolean.getBoolean(CheckIn));
+						/* Added by Amer*/
+						PassengerId+=1;
+						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);
+						
+						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
+						} 
+						/* Added by Amer*/
+						else {
+							System.out.println("the booking files is not correct format, please check the formate and then rerun the application");
+							System.exit(ERROR);
 						}
+						
 					}
 					
 					
@@ -185,7 +225,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 	
 	
 
-	public boolean PopulateAllFlights()
+	public boolean PopulateAllFlights(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
@@ -194,7 +234,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
@@ -213,6 +253,11 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
+						}
+						/* Added by Amer*/
+						else {
+							System.out.println("the Flight file is not correct format, please check the formate and then rerun the application");
+							System.exit(ERROR);
 						}
 					}
 					/*Added by Faisal*/

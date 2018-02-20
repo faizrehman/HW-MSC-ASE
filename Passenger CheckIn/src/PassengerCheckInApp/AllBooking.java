@@ -14,7 +14,7 @@ private HashMap<String,Booking> bookingList;
 	}
 		
 	
-	public Booking IsValidBooking(String BookingReference,String PassengerName) throws  IllegalStateException
+	public Booking IsValidBooking(String BookingReference,String PassengerLName) throws  IllegalStateException
 	{		
 		if(BookingReference.trim().length()==0 || !BookingReference.toUpperCase().matches("^[A-Za-z]{3}[0-9]{3}\\z"))
 		{
@@ -24,7 +24,10 @@ private HashMap<String,Booking> bookingList;
 		Booking a = bookingList.get(BookingReference.toUpperCase());
 		if(a!=null)
 		{		
-			if(a.getPassengerName().toLowerCase().equals(PassengerName.toLowerCase()))
+			
+			/* Modified by Amer*/
+			
+			if(a.getPassenger().getPassengerLName().toLowerCase().equals(PassengerLName.toLowerCase()))
 			{
 				return a;		
 			}
@@ -62,7 +65,7 @@ private HashMap<String,Booking> bookingList;
 		
 		for(Booking details : bookingList.values())
 		{
-			allEntries.append(details.getBookingReference() + "		" + details.getPassengerName() + "		" + details.IsCheckedIn());
+			allEntries.append(details.getBookingReference() + "		" + details.getPassenger().getPassengerFName()+ " " + details.getPassenger().getPassengerLName() + "		" + details.IsCheckedIn());
 			allEntries.append('\n');
 		}
 		return allEntries.toString();
