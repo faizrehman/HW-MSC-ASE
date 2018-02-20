@@ -103,14 +103,15 @@ public class AllBookingTest {
 						/* Added by Faisal*/
 						int variableCount = data.length;
 						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 							String FlightCode = data[0].length() == 0 ? "" : data[0];
 							String CarrierName = data[1].length() == 0 ? "" : data[1];
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
-							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];							
+							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];	
+							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
 							
-						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight));
+						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						

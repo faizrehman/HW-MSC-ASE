@@ -111,9 +111,10 @@ public class AllFlightTest {
 							String FlightCode = data[0].length() == 0 ? "" : data[0];
 							String CarrierName = data[1].length() == 0 ? "" : data[1];
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
-							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];							
+							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];		
+							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
 							
-						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight));
+						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
@@ -156,8 +157,9 @@ public class AllFlightTest {
 		String CarrierName="";
 		String FlightTime="";
 		int MaxAllowedWeight=0;
+		int ExtraChargePerKg = 0;
 		
-		Flight flight=new Flight(FlightCode, CarrierName, FlightTime, MaxAllowedWeight);
+		Flight flight=new Flight(FlightCode, CarrierName, FlightTime, MaxAllowedWeight,ExtraChargePerKg);
 	}
 	
 

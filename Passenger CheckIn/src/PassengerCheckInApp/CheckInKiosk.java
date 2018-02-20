@@ -282,6 +282,7 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				    	  
 				    	  if(retbooking!=null)
 				    	  {
+				    		  				    		  
 				    		  Flight fl = flights.getAllFlights().get(retbooking.getFlightCode());
 				    		  Integer weightDifference=Integer.parseInt(form.getText(2)) - fl.getMaxAllowedWeight();
 				    		  Integer extraChargePerKg = fl.getExtraChargePerKg();
@@ -305,6 +306,8 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 						    	 
 				    			  }
 				    		  }
+				    		  
+				    		  
 				    		  bookings.UpdateCheckInStatus(form.getText(1).toUpperCase(),Integer.parseInt(form.getText(2)),form.getText(3));
 				    		  if(ViewReport!=null)
 				    			  ViewReport.RefreshReport();

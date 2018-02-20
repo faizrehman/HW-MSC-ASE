@@ -19,10 +19,10 @@ public class Booking {
 		/* Added by Faisal*/
 		if(BookingReference.trim().length() == 0 || PassengerName.trim().length() == 0
 				|| FlightCode.trim().length() == 0) 
-		{
-			
+		{			
 			throw new IllegalArgumentException("Booking Reference, Passenger Name & Flight Code Cannot be blank");
-		}
+		}	
+		
 		this.BookingReference = BookingReference;
 		this.PassengerName = PassengerName;
 		this.FlightCode = FlightCode;
@@ -34,6 +34,9 @@ public class Booking {
 		return CheckIn;
 		
 	}
+	
+	
+	
 	/*Added By Faisal*/
 	public void SetCheckedIn(Integer CheckedInWeight,String BaggageDimension ) throws InValidCheckInException
 	{			

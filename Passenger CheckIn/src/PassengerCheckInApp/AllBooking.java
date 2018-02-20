@@ -16,18 +16,21 @@ private HashMap<String,Booking> bookingList;
 	
 	public Booking IsValidBooking(String BookingReference,String PassengerName) throws  IllegalStateException
 	{		
-		if(BookingReference.trim().length()==0)
+		if(BookingReference.trim().length()==0 || !BookingReference.toUpperCase().matches("^[A-Za-z]{3}[0-9]{3}\\z"))
 		{
-			throw new IllegalStateException("Booking Reference or Passenger Last name cannot be blank");
+			throw new IllegalStateException("Booking Reference must be 3 characters followed by 3 digits");
 			
 		}
 		Booking a = bookingList.get(BookingReference.toUpperCase());
 		if(a!=null)
-		{
-		
+		{		
 			if(a.getPassengerName().toLowerCase().equals(PassengerName.toLowerCase()))
 			{
 				return a;		
+			}
+			else
+			{
+				throw new IllegalStateException("Not a valid passenger name");
 			}
 		}
 		return null;
