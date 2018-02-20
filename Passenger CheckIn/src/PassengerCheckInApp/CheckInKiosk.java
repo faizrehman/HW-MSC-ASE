@@ -202,14 +202,15 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 						/* Added by Faisal*/
 						int variableCount = data.length;
 						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 							String FlightCode = data[0].length() == 0 ? "" : data[0];
 							String CarrierName = data[1].length() == 0 ? "" : data[1];
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
-							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];							
+							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];	
+							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
 							
-						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight));
+						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
@@ -281,12 +282,15 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 				    	  
 				    	  if(retbooking!=null)
 				    	  {
-				    		  Integer weightDifference=Integer.parseInt(form.getText(2)) - flights.getAllFlights().get(retbooking.getFlightCode()).getMaxAllowedWeight();
+				    		  Flight fl = flights.getAllFlights().get(retbooking.getFlightCode());
+				    		  Integer weightDifference=Integer.parseInt(form.getText(2)) - fl.getMaxAllowedWeight();
+				    		  Integer extraChargePerKg = fl.getExtraChargePerKg();
 				    		  if(weightDifference>0)
 				    		  {
+				    			  Integer extracharge = weightDifference * extraChargePerKg;
 				    			  String answer =            
 				    			          JOptionPane.showInputDialog 
-				    			          ( "Baggage weight exceed by " + weightDifference.toString() + "KG? Write yes if you want to pay and "
+				    			          ( "Baggage weight exceed by " + weightDifference.toString() + "KG?, Extra Luggage cost will be " + extracharge +" $, Write yes if you want to pay and "
 				    			          		+ "proceed with this weight" );
 				    			  if (!answer.equals("yes"))
 				    			  {
