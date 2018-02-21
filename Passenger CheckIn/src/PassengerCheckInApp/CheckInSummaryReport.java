@@ -18,17 +18,23 @@ public class CheckInSummaryReport  {
 		this.bookings = b;
 		this.flights = f;
 	}
-	
+	public static String fixedLengthString(String string, int length) {
+	    return String.format("%1$"+length+ "s", string);
+	}
 	public String getCheckInSummaryReport()
 	{
 		
 		/*Added By Amer Still need more*/
 		StringBuffer allEntries=new StringBuffer();
+		String space10 = new String(new char[2]).replace('\0', '|');
 		
-		allEntries.append( "Carrier Name" + "		" + "Booking Reference" + "		" + "Passenger Name" + "		" 
-						+ "CheckIn Status" + "		" + "CheckedIn Weight (KG)");
+		
+		
+		allEntries.append( fixedLengthString("Carrier Name",20) + space10 + fixedLengthString("Booking Reference",17) + space10 + fixedLengthString("Passenger Name",25) + space10 
+						+ fixedLengthString("CheckIn Status",14) + space10 + fixedLengthString("CheckedIn Weight (KG)",21));
 		allEntries.append('\n');
-		
+
+		allEntries.append('\n');
 		for(Booking details : bookings.getAllBookings().values())
 		{
 			String getFlightCode =details.getFlightCode();
@@ -44,8 +50,10 @@ public class CheckInSummaryReport  {
 			
 			
 			String Passenger=details.getPassenger().getPassengerFName() +" " + details.getPassenger().getPassengerLName();
+	
 			
-			allEntries.append( carrierName + "			" + details.getBookingReference() + "			" + Passenger + "			" + details.IsCheckedIn() + "			" + details.getCheckedInWeight());
+			allEntries.append( fixedLengthString(carrierName,20) + space10 + fixedLengthString(details.getBookingReference(),17) + space10 +
+					fixedLengthString(Passenger,25)+ space10 + fixedLengthString(String.valueOf(details.IsCheckedIn()),14)+ space10 + fixedLengthString(String.valueOf(details.getCheckedInWeight()),21));
 			
 			allEntries.append('\n');
 		}
