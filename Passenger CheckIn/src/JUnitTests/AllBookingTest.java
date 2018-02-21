@@ -159,12 +159,12 @@ public class AllBookingTest {
 	@Test
 	public void testValidBookings() {
 		String BookingReference="BRN001";
-		String PassengerName="Faizan";
+		String PassengerName="rree";
 		assertEquals(bookings.getAllBookings().get(BookingReference), bookings.IsValidBooking(BookingReference, PassengerName));
 	}
 	
 	
-	@Test
+	@Test(expected = IllegalStateException.class)
 	public void testInValidBookings() {
 		String BookingReference="InvalidNumber";
 		String PassengerName="Faizan";

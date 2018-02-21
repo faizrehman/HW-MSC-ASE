@@ -114,7 +114,7 @@ public class AllFlightTest {
 						/* Added by Faisal*/
 						int variableCount = data.length;
 						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 							String FlightCode = data[0].length() == 0 ? "" : data[0];
 							String CarrierName = data[1].length() == 0 ? "" : data[1];
@@ -159,7 +159,7 @@ public class AllFlightTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testFlightConstructor() {
+	public void testFlightConstructor() throws IllegalArgumentException{
 		
 		String FlightCode="";
 		String CarrierName="";
@@ -167,7 +167,7 @@ public class AllFlightTest {
 		int MaxAllowedWeight=0;
 		int ExtraChargePerKg = 0;
 		
-		Flight flight=new Flight(FlightCode, CarrierName, FlightTime, MaxAllowedWeight,ExtraChargePerKg);
+		new Flight(FlightCode, CarrierName, FlightTime, MaxAllowedWeight,ExtraChargePerKg);
 	}
 	
 
