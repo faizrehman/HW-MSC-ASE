@@ -3,7 +3,6 @@ package PassengerCheckInApp;
 public class Flight {
 	
 	private String  FlightCode;
-
 	private Carrier  carrier;
 	private String  FlightTime;
 	private Integer MaxAllowedWeight;	

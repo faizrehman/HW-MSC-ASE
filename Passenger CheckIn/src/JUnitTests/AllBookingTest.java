@@ -196,7 +196,7 @@ public class AllBookingTest {
 	public void testInValidBookings() {
 		String BookingReference="InvalidNumber";
 		String PassengerLName="Rehman";
-	
+		/* Added by Amer*/
 		try {
 			assertEquals("Booking Reference must be 3 characters followed by 3 digits", bookings.IsValidBooking(BookingReference, PassengerLName));
 		    } 

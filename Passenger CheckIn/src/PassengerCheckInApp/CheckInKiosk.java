@@ -54,8 +54,8 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		
 		/* Modified by Amer*/
 		
-		String bookingsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt";
-		String flightsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt";
+		String bookingsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings_MOCK_DATA500.txt";
+		String flightsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo_MOCK_DATA50.txt";
 		
 //		String bookingsPath,flightsPath="";
 		

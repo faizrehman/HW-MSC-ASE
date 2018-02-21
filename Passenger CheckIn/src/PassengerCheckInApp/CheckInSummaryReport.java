@@ -1,4 +1,8 @@
 package PassengerCheckInApp;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 /*Added By Faisal*/
 public class CheckInSummaryReport  {
 	
@@ -17,6 +21,8 @@ public class CheckInSummaryReport  {
 	
 	public String getCheckInSummaryReport()
 	{
+		
+		/*Added By Amer Still need more*/
 		StringBuffer allEntries=new StringBuffer();
 		
 		allEntries.append( "Carrier Name" + "		" + "Booking Reference" + "		" + "Passenger Name" + "		" 
@@ -25,13 +31,26 @@ public class CheckInSummaryReport  {
 		
 		for(Booking details : bookings.getAllBookings().values())
 		{
-			allEntries.append( flights.getAllFlights().get(details.getFlightCode()).getCarrier().getCarrierName() + "			" + details.getBookingReference() + "			" 
-								+ details.getPassenger().getPassengerFName() +" " + details.getPassenger().getPassengerLName() + "			" + details.IsCheckedIn()
-								+ "			" + details.getCheckedInWeight());
+			String getFlightCode =details.getFlightCode();
+			
+			HashMap<String,Flight> AllFlights =flights.getAllFlights();
+		
+			Flight flight=AllFlights.get(getFlightCode);
+			if (flight==null) 
+			{
+				continue;
+			}
+			String carrierName =flight.getCarrier().getCarrierName();
+			
+			
+			String Passenger=details.getPassenger().getPassengerFName() +" " + details.getPassenger().getPassengerLName();
+			
+			allEntries.append( carrierName + "			" + details.getBookingReference() + "			" + Passenger + "			" + details.IsCheckedIn() + "			" + details.getCheckedInWeight());
+			
 			allEntries.append('\n');
 		}
 		return allEntries.toString();
-		
+	
 		
 	}
 	
