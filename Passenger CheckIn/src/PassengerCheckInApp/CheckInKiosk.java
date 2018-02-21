@@ -230,8 +230,6 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		
 	}
 	
-	
-
 	public boolean PopulateAllFlights(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object

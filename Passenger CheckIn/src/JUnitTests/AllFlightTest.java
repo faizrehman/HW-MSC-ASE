@@ -27,13 +27,17 @@ public class AllFlightTest {
 	
 	@Before
 	public void setUp() {
+		String bookingsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt";
+		String flightsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt";
 		
-		PopulateAllBookings();
-		PopulateAllFlights();
+		PopulateAllBookings(bookingsPath);
+		PopulateAllFlights(flightsPath);
 	 
 	}
 
-	public boolean PopulateAllBookings()
+	
+	@SuppressWarnings("resource")
+	public boolean PopulateAllBookings(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
@@ -44,32 +48,47 @@ public class AllFlightTest {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/Bookings.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
 						/* Added by Faisal*/
 						int variableCount = data.length;
-						
 						if(variableCount == 5) 
 						{
 						
 						String bookingReference = data[0].length() == 0 ? "" : data[0];
 						String PassengerFName = data[1].length() == 0 ? "" : data[1];
 						String PassengerLName = data[2].length() == 0 ? "" : data[2];
-						String FlightCode = data[2].length() == 0 ? "" : data[2];
-						String CheckIn = data[3].length() == 0 ? "" : data[3];
+						String FlightCode = data[2].length() == 0 ? "" : data[3];
+						String CheckIn = data[3].length() == 0 ? "" : data[4];
 						
 						/* Added by Amer*/
-						PassengerId+=1;
-						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);
 						
+//						Iterator<Booking> items = bookings.getAllBookings().values().iterator();
+//						boolean Passengerexist;
+//						while (items.hasNext()) {
+//						if(PassengerFName+" " + PassengerLName ==items.next().getPassenger().getPassengerFullName()){
+//							Passengerexist=true;
+//							continue; 			
+//							}
+//						
+//										}
+						
+						PassengerId+=1;
+						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
+						} 
+						/* Added by Amer*/
+						else {
+							System.out.println("the booking files is not correct format, please check the formate and then rerun the application");
+							return false;
 						}
+						
 					}
-					buff.close();
+					
 					
 				}
 				catch(FileNotFoundException e)
@@ -98,12 +117,14 @@ public class AllFlightTest {
 				return true;
 		
 	}
-		
-	public boolean PopulateAllFlights()
+	
+	@SuppressWarnings("resource")
+	public boolean PopulateAllFlights(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				flights = new AllFlight();
+				
 				Carrier carrierData;
 				int carrierId=0;
 				
@@ -111,27 +132,32 @@ public class AllFlightTest {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/FlightsInfo.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
 						/* Added by Faisal*/
 						int variableCount = data.length;
 						
-						if(variableCount == 4) 
+						if(variableCount == 5) 
 						{
 							String FlightCode = data[0].length() == 0 ? "" : data[0];
 							String CarrierName = data[1].length() == 0 ? "" : data[1];
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
-							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];		
+							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];	
 							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
-							/* Added by Amer*/
-							carrierId+=1;
-							carrierData = new Carrier(carrierId,CarrierName );		
+						/* Added by Amer*/
+						carrierId+=1;
+						carrierData = new Carrier(carrierId,CarrierName );	
 						Flight b = new Flight(FlightCode,carrierData,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
+						}
+						/* Added by Amer*/
+						else {
+							System.out.println("the Flight file is not correct format, please check the formate and then rerun the application");
+							return false;
 						}
 					}
 					/*Added by Faisal*/
@@ -164,6 +190,8 @@ public class AllFlightTest {
 		
 	}
 	
+	
+	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void testFlightConstructor() {
 		

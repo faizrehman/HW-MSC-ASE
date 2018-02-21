@@ -23,49 +23,66 @@ public class AllBookingTest {
 	@Before
 	public void setUp() {
 		
-		PopulateAllBookings();
-		PopulateAllFlights();
+		String bookingsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/Bookings.txt";
+		String flightsPath="/Users/amer/git/HW-MSC-ASE/Passenger CheckIn/bin/FlightsInfo.txt";
+		
+		PopulateAllBookings(bookingsPath);
+		PopulateAllFlights(flightsPath);
 	 
 	}
 
-	public boolean PopulateAllBookings()
+	public boolean PopulateAllBookings(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				bookings = new AllBooking();
 				Passenger PassengerData;
 				int PassengerId=0;
-				
 				BufferedReader buff=null;
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/Bookings.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
 						/* Added by Faisal*/
 						int variableCount = data.length;
-						
 						if(variableCount == 5) 
 						{
 						
 						String bookingReference = data[0].length() == 0 ? "" : data[0];
 						String PassengerFName = data[1].length() == 0 ? "" : data[1];
 						String PassengerLName = data[2].length() == 0 ? "" : data[2];
-						String FlightCode = data[2].length() == 0 ? "" : data[2];
-						String CheckIn = data[3].length() == 0 ? "" : data[3];
+						String FlightCode = data[2].length() == 0 ? "" : data[3];
+						String CheckIn = data[3].length() == 0 ? "" : data[4];
 						
 						/* Added by Amer*/
-						PassengerId+=1;
-						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);
 						
+//						Iterator<Booking> items = bookings.getAllBookings().values().iterator();
+//						boolean Passengerexist;
+//						while (items.hasNext()) {
+//						if(PassengerFName+" " + PassengerLName ==items.next().getPassenger().getPassengerFullName()){
+//							Passengerexist=true;
+//							continue; 			
+//							}
+//						
+//										}
+						
+						PassengerId+=1;
+						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
+						} 
+						/* Added by Amer*/
+						else {
+							System.out.println("the booking files is not correct format, please check the formate and then rerun the application");
+							return false;
 						}
+						
 					}
-					buff.close();
+					
 					
 				}
 				catch(FileNotFoundException e)
@@ -94,12 +111,13 @@ public class AllBookingTest {
 				return true;
 		
 	}
-		
-	public boolean PopulateAllFlights()
+	
+	public boolean PopulateAllFlights(String filePath)
 	{
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				flights = new AllFlight();
+				
 				Carrier carrierData;
 				int carrierId=0;
 				
@@ -107,7 +125,7 @@ public class AllBookingTest {
 				String data []=new String[4];
 				
 				try {
-					buff=new BufferedReader(new FileReader("bin/FlightsInfo.txt"));
+					buff=new BufferedReader(new FileReader(filePath));
 					String inputLine=buff.readLine();
 					while(inputLine !=null) {
 						data=inputLine.split(",");
@@ -121,13 +139,18 @@ public class AllBookingTest {
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
 							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];	
 							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
-							/* Added by Amer*/
-							carrierId+=1;
-							carrierData = new Carrier(carrierId,CarrierName );		
+						/* Added by Amer*/
+						carrierId+=1;
+						carrierData = new Carrier(carrierId,CarrierName );	
 						Flight b = new Flight(FlightCode,carrierData,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
+						}
+						/* Added by Amer*/
+						else {
+							System.out.println("the Flight file is not correct format, please check the formate and then rerun the application");
+							return false;
 						}
 					}
 					/*Added by Faisal*/
@@ -164,16 +187,21 @@ public class AllBookingTest {
 	@Test
 	public void testValidBookings() {
 		String BookingReference="BRN001";
-		String PassengerName="Faizan";
-		assertEquals(bookings.getAllBookings().get(BookingReference), bookings.IsValidBooking(BookingReference, PassengerName));
+		String PassengerLName="Rehman";
+		assertEquals(bookings.getAllBookings().get(BookingReference), bookings.IsValidBooking(BookingReference, PassengerLName));
 	}
 	
 	
 	@Test
 	public void testInValidBookings() {
 		String BookingReference="InvalidNumber";
-		String PassengerName="Faizan";
-		assertEquals(null, bookings.IsValidBooking(BookingReference, PassengerName));
+		String PassengerLName="Rehman";
+	
+		try {
+			assertEquals("Booking Reference must be 3 characters followed by 3 digits", bookings.IsValidBooking(BookingReference, PassengerLName));
+		    } 
+		    catch (Exception e) {
+		    } 
 	}
 
 	@Test(expected = IllegalStateException.class)
