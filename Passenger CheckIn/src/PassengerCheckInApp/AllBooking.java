@@ -26,7 +26,8 @@ private HashMap<String,Booking> bookingList;
 		{		
 			
 			/* Modified by Amer*/
-			
+			if (a.IsCheckedIn()==false) {
+				
 			if(a.getPassenger().getPassengerLName().toLowerCase().equals(PassengerLName.toLowerCase()))
 			{
 				return a;		
@@ -34,6 +35,9 @@ private HashMap<String,Booking> bookingList;
 			else
 			{
 				throw new IllegalStateException("Not a valid passenger name");
+			}}else
+			{
+				throw new IllegalStateException("passenger has already checked-in");
 			}
 		}
 		return null;
