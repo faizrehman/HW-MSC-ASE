@@ -56,6 +56,7 @@ private HashMap<String,Booking> bookingList;
 	
 	public void Add(Booking a) 
 	{		
+		
 		bookingList.put(a.getBookingReference(), a);	
 	}
 	

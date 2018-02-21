@@ -15,7 +15,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -179,9 +182,21 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 						String CheckIn = data[3].length() == 0 ? "" : data[4];
 						
 						/* Added by Amer*/
-						PassengerId+=1;
-						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);
 						
+						
+						@SuppressWarnings("unchecked")
+						Map<Object, Object> filteredPassenger = bookings.getAllBookings().
+						entrySet().stream()
+						.filter(map ->  map.getValue().getPassenger().getPassengerFullName()
+						.contains(PassengerFName+" "+PassengerLName))
+						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+						
+								if (filteredPassenger == null) {
+									 continue;
+								}
+								
+						PassengerId+=1;
+						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
 						bookings.Add(b);
 						inputLine=buff.readLine();
