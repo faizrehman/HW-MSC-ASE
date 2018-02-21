@@ -23,7 +23,7 @@ private HashMap<String,Flight> flightList;
 		
 		for(Flight details : flightList.values())
 		{
-			allEntries.append(details.getFlightCode() + "		" + details.getCarrierName());
+			allEntries.append(details.getFlightCode() + "		" + details.getCarrier().getCarrierName());
 			allEntries.append('\n');
 		}
 		return allEntries.toString();		

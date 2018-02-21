@@ -25,7 +25,7 @@ public class CheckInSummaryReport  {
 		
 		for(Booking details : bookings.getAllBookings().values())
 		{
-			allEntries.append( flights.getAllFlights().get(details.getFlightCode()).getCarrierName() + "			" + details.getBookingReference() + "			" 
+			allEntries.append( flights.getAllFlights().get(details.getFlightCode()).getCarrier().getCarrierName() + "			" + details.getBookingReference() + "			" 
 								+ details.getPassenger().getPassengerFName() +" " + details.getPassenger().getPassengerLName() + "			" + details.IsCheckedIn()
 								+ "			" + details.getCheckedInWeight());
 			allEntries.append('\n');

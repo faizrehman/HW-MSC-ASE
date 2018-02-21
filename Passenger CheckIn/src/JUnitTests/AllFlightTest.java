@@ -14,6 +14,7 @@ import org.junit.Test;
 import PassengerCheckInApp.AllBooking;
 import PassengerCheckInApp.AllFlight;
 import PassengerCheckInApp.Booking;
+import PassengerCheckInApp.Carrier;
 import PassengerCheckInApp.Flight;
 import PassengerCheckInApp.InValidCheckInException;
 import PassengerCheckInApp.Passenger;
@@ -103,6 +104,9 @@ public class AllFlightTest {
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				flights = new AllFlight();
+				Carrier carrierData;
+				int carrierId=0;
+				
 				BufferedReader buff=null;
 				String data []=new String[4];
 				
@@ -121,8 +125,10 @@ public class AllFlightTest {
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
 							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];		
 							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
-							
-						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
+							/* Added by Amer*/
+							carrierId+=1;
+							carrierData = new Carrier(carrierId,CarrierName );		
+						Flight b = new Flight(FlightCode,carrierData,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						
@@ -162,12 +168,12 @@ public class AllFlightTest {
 	public void testFlightConstructor() {
 		
 		String FlightCode="";
-		String CarrierName="";
+		Carrier Carrier=new Carrier(0,"");
 		String FlightTime="";
 		int MaxAllowedWeight=0;
 		int ExtraChargePerKg = 0;
 		
-		Flight flight=new Flight(FlightCode, CarrierName, FlightTime, MaxAllowedWeight,ExtraChargePerKg);
+		Flight flight=new Flight(FlightCode, Carrier, FlightTime, MaxAllowedWeight,ExtraChargePerKg);
 	}
 	
 

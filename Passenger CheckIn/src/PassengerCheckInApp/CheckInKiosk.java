@@ -10,16 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -182,19 +177,16 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 						String CheckIn = data[3].length() == 0 ? "" : data[4];
 						
 						/* Added by Amer*/
+//						Iterator<Booking> items = bookings.getAllBookings().values().iterator();
+//						boolean Passengerexist;
+//						while (items.hasNext()) {
+//						if(PassengerFName+" " + PassengerLName ==items.next().getPassenger().getPassengerFullName()){
+//							Passengerexist=true;
+//							continue; 			
+//							}
+//						
+//										}
 						
-						
-						@SuppressWarnings("unchecked")
-						Map<Object, Object> filteredPassenger = bookings.getAllBookings().
-						entrySet().stream()
-						.filter(map ->  map.getValue().getPassenger().getPassengerFullName()
-						.contains(PassengerFName+" "+PassengerLName))
-						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-						
-								if (filteredPassenger == null) {
-									 continue;
-								}
-								
 						PassengerId+=1;
 						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
@@ -245,6 +237,10 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 		// Fetching Data from CSV and initializing and populating bookings object
 		
 				flights = new AllFlight();
+				
+				Carrier carrierData;
+				int carrierId=0;
+				
 				BufferedReader buff=null;
 				String data []=new String[4];
 				
@@ -263,8 +259,10 @@ public class CheckInKiosk extends JFrame implements ActionListener {
 							String FlightTime = data[2].length() == 0 ? "" : data[2];
 							String MaxAllowedWeight = data[3].length() == 0 ? "" : data[3];	
 							String ExtraChargePerKg = data[4].length() == 0 ? "" : data[4];
-							
-						Flight b = new Flight(FlightCode,CarrierName,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
+						/* Added by Amer*/
+						carrierId+=1;
+						carrierData = new Carrier(carrierId,CarrierName );	
+						Flight b = new Flight(FlightCode,carrierData,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
 						flights.Add(b);
 						inputLine=buff.readLine();
 						

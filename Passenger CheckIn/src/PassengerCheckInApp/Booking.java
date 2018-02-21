@@ -5,31 +5,12 @@ public class Booking {
 	
 	
 	private String  BookingReference;
-//	private String  PassengerName;
 	private Passenger passenger;
 	private String  FlightCode;
 	private boolean CheckIn;
 	private Integer CheckedInWeight;
 	private String  BaggageDimension;
-	
-	
-//	public Booking(String BookingReference, String PassengerName,
-//			String FlightCode,boolean CheckIn) throws IllegalArgumentException
-//	{
-//		
-//		/* Added by Faisal*/
-//		if(BookingReference.trim().length() == 0 || PassengerName.trim().length() == 0
-//				|| FlightCode.trim().length() == 0) 
-//		{			
-//			throw new IllegalArgumentException("Booking Reference, Passenger Name & Flight Code Cannot be blank");
-//		}	
-//		
-//		this.BookingReference = BookingReference;
-//		this.PassengerName = PassengerName;
-//		this.FlightCode = FlightCode;
-//		this.CheckIn = CheckIn;		
-//				
-//	}
+
 	public Booking(String BookingReference, Passenger PassengerData,
 			String FlightCode,boolean CheckIn) throws IllegalArgumentException
 	{

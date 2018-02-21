@@ -3,24 +3,25 @@ package PassengerCheckInApp;
 public class Flight {
 	
 	private String  FlightCode;
-	private String  CarrierName;
+
+	private Carrier  carrier;
 	private String  FlightTime;
 	private Integer MaxAllowedWeight;	
 	private Integer ExtraChargePerKg;
 	
-	public Flight(String FlightCode, String CarrierName,
+	public Flight(String FlightCode, Carrier Carrier,
 			String FlightTime,int MaxAllowedWeight,Integer ExtraChargePerKg)  throws IllegalArgumentException
 	{
 		
 		/* Added by Faisal*/
-		if(FlightCode.trim().length() == 0 || CarrierName.trim().length() == 0
+		if(FlightCode.trim().length() == 0 || Carrier ==null
 				|| FlightTime.trim().length() == 0) 
 		{
 			
 			throw new IllegalArgumentException("FlighCode, Carrier Name & Flight Time Cannot be blank");
 		}
 		this.FlightCode = FlightCode;
-		this.CarrierName = CarrierName;
+		this.carrier = Carrier;
 		this.FlightTime = FlightTime;
 		this.MaxAllowedWeight = MaxAllowedWeight;	
 		this.ExtraChargePerKg = ExtraChargePerKg;
@@ -31,8 +32,8 @@ public class Flight {
 		return FlightCode;		
 	}
 
-	public String getCarrierName() {		
-		return CarrierName;
+	public Carrier getCarrier() {		
+		return carrier;
 		
 	}
 	public String getFlightTime() {		
