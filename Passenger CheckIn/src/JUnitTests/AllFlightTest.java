@@ -78,11 +78,11 @@ public class AllFlightTest {
 						PassengerId+=1;
 						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
-						/* Added by Amer*/
+						
 						try {
 							bookings.Add(b);
 						} catch (Exception e) {
-							System.out.println( e.getMessage() + ".  booking ref :  " + b.getBookingReference() + " has not added");
+							System.out.println( "booking ref :  " + b.getBookingReference() + " has not added.  " + e.getMessage()  );
 							b=null;
 						}
 						inputLine=buff.readLine();
@@ -156,7 +156,13 @@ public class AllFlightTest {
 						carrierId+=1;
 						carrierData = new Carrier(carrierId,CarrierName );	
 						Flight b = new Flight(FlightCode,carrierData,FlightTime,Integer.parseInt(MaxAllowedWeight),Integer.parseInt(ExtraChargePerKg));
-						flights.Add(b);
+						try {
+							flights.Add(b);
+						} catch (Exception e) {
+							System.out.println( "Flight Code :  " + b.getFlightCode() + " has not added.  " + e.getMessage()  );
+							b=null;
+
+						}
 						inputLine=buff.readLine();
 						
 						}

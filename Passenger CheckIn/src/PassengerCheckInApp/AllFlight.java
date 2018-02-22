@@ -10,10 +10,24 @@ private HashMap<String,Flight> flightList;
 	{
 		flightList = new HashMap<String,Flight>();
 	}
-	
-	
-	public void Add(Flight a) 
+	/* Added by Amer*/
+	public boolean  IsValidFlightCode(String FlightCode) throws  IllegalStateException
 	{		
+		if(FlightCode.trim().length()==0 || !FlightCode.toUpperCase().matches("^[A-Za-z]{2}[0-9]{3}\\z"))
+		{
+			throw new IllegalStateException("Flight Code must be 2 characters followed by 3 digits");
+			
+		}
+		
+		
+		return true;
+		
+	}
+	
+	public void Add(Flight a) throws Exception
+	{		
+		/* Modified by Amer*/
+		 if (IsValidFlightCode(a.getFlightCode()))
 		flightList.put(a.getFlightCode(), a);	
 	}
 	
