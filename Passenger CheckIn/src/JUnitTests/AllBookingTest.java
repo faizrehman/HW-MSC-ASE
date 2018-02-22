@@ -72,7 +72,13 @@ public class AllBookingTest {
 						PassengerId+=1;
 						PassengerData = new Passenger(PassengerId, PassengerFName, PassengerLName);		
 						Booking b = new Booking(bookingReference, PassengerData,FlightCode,Boolean.getBoolean(CheckIn));
-						bookings.Add(b);
+						/* Added by Amer*/
+						try {
+							bookings.Add(b);
+						} catch (Exception e) {
+							System.out.println( e.getMessage() + ".  booking ref :  " + b.getBookingReference() + " has not added");
+							b=null;
+						}
 						inputLine=buff.readLine();
 						} 
 						/* Added by Amer*/
@@ -106,7 +112,7 @@ public class AllBookingTest {
 					return false;
 					
 					
-				}
+				} 
 
 				return true;
 		

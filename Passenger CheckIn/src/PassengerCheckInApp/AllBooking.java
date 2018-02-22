@@ -43,6 +43,32 @@ private HashMap<String,Booking> bookingList;
 		return null;
 		
 	}
+	/* Added by Amer*/
+	public boolean  IsValidBookingReference(String BookingReference) throws  IllegalStateException
+	{		
+		if(BookingReference.trim().length()==0 || !BookingReference.toUpperCase().matches("^[A-Za-z]{3}[0-9]{3}\\z"))
+		{
+			throw new IllegalStateException("Booking Reference must be 3 characters followed by 3 digits");
+			
+		}
+		
+		
+		return true;
+		
+	}
+	/* Added by Amer*/
+	public boolean  IsValidFlightCode(String FlightCode) throws  IllegalStateException
+	{		
+		if(FlightCode.trim().length()==0 || !FlightCode.toUpperCase().matches("^[A-Za-z]{2}[0-9]{3}\\z"))
+		{
+			throw new IllegalStateException("Flight Code must be 2 characters followed by 3 digits");
+			
+		}
+		
+		
+		return true;
+		
+	}
 	
 	public boolean UpdateCheckInStatus(String BookingReference,Integer CheckedInWeight,
 							String BaggageDimension) throws InValidCheckInException
@@ -58,9 +84,11 @@ private HashMap<String,Booking> bookingList;
 		
 	}
 	
-	public void Add(Booking a) 
+	public void Add(Booking a) throws Exception
 	{		
-		
+		/* Modified by Amer*/
+		if (IsValidBookingReference(a.getBookingReference()))
+			if (IsValidFlightCode(a.getFlightCode()))
 		bookingList.put(a.getBookingReference(), a);	
 	}
 	
