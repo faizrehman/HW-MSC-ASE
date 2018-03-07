@@ -1,7 +1,7 @@
 package JUnitTests;
 import PassengerCheckInApp.*;
 import static org.junit.Assert.*;
-
+import PassengerCheckInApp.dataClasses.*;
 import org.junit.Test;
 
 

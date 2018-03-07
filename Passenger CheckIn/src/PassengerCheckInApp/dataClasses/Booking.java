@@ -1,6 +1,8 @@
-package PassengerCheckInApp;
+package PassengerCheckInApp.dataClasses;
 import javax.swing.JOptionPane;
 
+
+import PassengerCheckInApp.Exception.*;
 public class Booking {
 	
 	

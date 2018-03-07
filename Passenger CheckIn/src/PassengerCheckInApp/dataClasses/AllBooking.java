@@ -1,7 +1,9 @@
-package PassengerCheckInApp;
+package PassengerCheckInApp.dataClasses;
 
 import java.util.HashMap;
 import java.util.TreeMap;
+
+import PassengerCheckInApp.Exception.*;
 
 public class AllBooking {
 	

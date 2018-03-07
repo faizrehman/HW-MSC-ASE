@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 import org.junit.*;
 
 import PassengerCheckInApp.*;
-
+import PassengerCheckInApp.Exception.*;
+import PassengerCheckInApp.dataClasses.*;
 import org.junit.Test;
 
 public class AllBookingTest {
@@ -210,11 +211,9 @@ public class AllBookingTest {
 		String BookingReference="InvalidNumber";
 		String PassengerLName="Rehman";
 		/* Added by Amer*/
-		try {
+		
 			assertEquals("Booking Reference must be 3 characters followed by 3 digits", bookings.IsValidBooking(BookingReference, PassengerLName));
-		    } 
-		    catch (Exception e) {
-		    } 
+		   
 	}
 
 	@Test(expected = IllegalStateException.class)

@@ -1,4 +1,4 @@
-package PassengerCheckInApp;
+package PassengerCheckInApp.dataClasses;
 /*Added By Faisal*/
 public class Flight {
 	

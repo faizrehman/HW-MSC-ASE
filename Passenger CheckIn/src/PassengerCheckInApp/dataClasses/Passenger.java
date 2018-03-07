@@ -1,4 +1,4 @@
-package PassengerCheckInApp;
+package PassengerCheckInApp.dataClasses;
 
 import java.sql.Date;
 /*Added By Amer*/ 

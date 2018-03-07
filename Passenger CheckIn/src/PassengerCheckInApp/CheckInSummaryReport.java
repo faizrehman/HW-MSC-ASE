@@ -2,7 +2,7 @@ package PassengerCheckInApp;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-
+import PassengerCheckInApp.dataClasses.*;
 /*Added By Faisal*/
 public class CheckInSummaryReport  {
 	

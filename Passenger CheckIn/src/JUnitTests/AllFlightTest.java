@@ -11,14 +11,7 @@ import javax.swing.JOptionPane;
 import org.junit.Before;
 import org.junit.Test;
 
-import PassengerCheckInApp.AllBooking;
-import PassengerCheckInApp.AllFlight;
-import PassengerCheckInApp.Booking;
-import PassengerCheckInApp.Carrier;
-import PassengerCheckInApp.Flight;
-import PassengerCheckInApp.InValidCheckInException;
-import PassengerCheckInApp.Passenger;
-
+import PassengerCheckInApp.dataClasses.*;
 public class AllFlightTest {
 
 	

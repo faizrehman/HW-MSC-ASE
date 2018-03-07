@@ -1,4 +1,4 @@
-package PassengerCheckInApp;
+package PassengerCheckInApp.Exception;
 @SuppressWarnings("serial")
 public class InValidCheckInException  extends Exception{
 
